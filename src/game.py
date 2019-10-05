@@ -38,7 +38,7 @@ def main():
         if (button.is_clicked()):
             if (led_strip.is_in_the_middle()):
                 print("hit")
-                led_strip.do_victory_blink()
+                led_strip.blink_all(7, 0.12)
                 num_points += 1
             else:
                 print("miss")
@@ -47,12 +47,21 @@ def main():
             led_timer.speed_up()
         
         if (num_lives == 0):
-            led_strip.do_victory_blink()
+            led_strip.do_special_pattern(10, 0.1)
             led_strip.show_binary(num_points)
-            break
-    
-    print("You got", num_points, "points!")
-    wait = input("press enter to quit")
+
+            print("You got", num_points, "points!")
+                        
+            num_lives = STARTING_NUM_LIVES
+            num_points = 0
+            led_timer.sample_period = SAMPLE_PERIOD
+
+            waiting_for_button_press_before_starting_new_round = True
+
+            while (waiting_for_button_press_before_starting_new_round):
+                if button.is_clicked():
+                    led_strip.turn_all_off()
+                    waiting_for_button_press_before_starting_new_round = False
 
 if __name__ == '__main__':
 
