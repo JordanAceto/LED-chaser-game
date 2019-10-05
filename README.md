@@ -7,7 +7,8 @@ How to play:
 - you must hit the button when the red LED is illuminated to score points
 - if you miss, you lose a life
 - the LEDs scan faster after each button press, a truly devious challenge!
-- when you run out of lives, it shows you your score in binary
+- when you run out of lives, it shows your score in binary
+- it then waits for you to press the button, and then starts over
 
 Python source code is located in src.
 
