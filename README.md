@@ -4,8 +4,10 @@
 
 How to play:
 - the LEDs scan back and forth like night-rider
-- you must hit the putton when the red LED is illuminated
-- if you miss, the LEDs scan faster, for a truly devious challenge!
+- you must hit the button when the red LED is illuminated to score points
+- if you miss, you lose a life
+- the LEDs scan faster after each button press, a truly devious challenge!
+- when you run out of lives, it shows you your score in binary
 
 Python source code is located in src.
 
