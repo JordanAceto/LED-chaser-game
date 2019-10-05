@@ -3,6 +3,8 @@ import RPi.GPIO as GPIO
 
 from Direction import Direction, opposite
 
+from int_to_list_of_binary_digits import int_to_list_of_binary_digits
+
 import time
 
 class LED_Strip():
@@ -19,7 +21,6 @@ class LED_Strip():
         '''
         executes one tick of the led strip
         '''
-        # print("current led:", self.current_led_index)
         # turn the old LED off
         GPIO.output(self.led_pins[self.current_led_index], GPIO.LOW)
 
@@ -53,3 +54,14 @@ class LED_Strip():
 
     def hit_one_of_the_ends(self):
         return self.current_led_index == 0 or self.current_led_index == len(self.led_pins) - 1
+
+    def show_binary(self, integer):
+       
+        self.turn_all_off()
+
+        list_of_binary_digits = int_to_list_of_binary_digits(integer)
+
+        for i in range(len(list_of_binary_digits)):
+            if (list_of_binary_digits[i] == 1):
+                # go "backwards" so it shows the binary digits left-to-right
+                GPIO.output(self.led_pins[len(self.led_pins) - 1 - i], GPIO.HIGH)
