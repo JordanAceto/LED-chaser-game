@@ -14,7 +14,9 @@ class LED_Strip():
         for pin in self.led_pins:
             GPIO.setup(pin, GPIO.OUT)
 
-        self.current_led_index = len(self.led_pins) // 2
+        self.length = len(self.led_pins)
+        self.current_led_index = self.length // 2
+        self.middle_index = self.current_led_index
         self.current_direction = Direction.RIGHT
 
     def tick(self):
@@ -35,7 +37,7 @@ class LED_Strip():
         GPIO.output(self.led_pins[self.current_led_index], GPIO.HIGH)
 
     def is_in_the_middle(self):
-        return self.current_led_index == (len(self.led_pins) // 2)
+        return self.current_led_index == self.middle_index
 
     def turn_all_on(self):
         for led_pin in self.led_pins:
@@ -45,15 +47,31 @@ class LED_Strip():
         for led_pin in self.led_pins:
             GPIO.output(led_pin, GPIO.LOW)
 
-    def do_victory_blink(self):
-        for i in range(7):
+    def blink_all(self, num_blinks, delay):
+        
+        self.turn_all_off()
+
+        for i in range(num_blinks):
             self.turn_all_on()
-            time.sleep(0.15)
+            time.sleep(delay)
             self.turn_all_off()
-            time.sleep(0.15)
+            time.sleep(delay)
+
+    def do_special_pattern(self, num_times, delay):
+        
+        self.turn_all_off()
+
+        for i in range(num_times):
+            for j in range(self.middle_index, self.length):
+                GPIO.output(self.led_pins[j], GPIO.HIGH)
+                GPIO.output(self.led_pins[self.length - j - 1], GPIO.HIGH)
+                time.sleep(delay)
+                GPIO.output(self.led_pins[j], GPIO.LOW)
+                GPIO.output(self.led_pins[self.length - j - 1], GPIO.LOW)
+
 
     def hit_one_of_the_ends(self):
-        return self.current_led_index == 0 or self.current_led_index == len(self.led_pins) - 1
+        return self.current_led_index == 0 or self.current_led_index == self.length - 1
 
     def show_binary(self, integer):
        
@@ -62,6 +80,6 @@ class LED_Strip():
         list_of_binary_digits = int_to_list_of_binary_digits(integer)
 
         for i in range(len(list_of_binary_digits)):
-            if (list_of_binary_digits[i] == 1):
+            if (list_of_binary_digits[i] == 1 and i < self.length):
                 # go "backwards" so it shows the binary digits left-to-right
-                GPIO.output(self.led_pins[len(self.led_pins) - 1 - i], GPIO.HIGH)
+                GPIO.output(self.led_pins[self.length - 1 - i], GPIO.HIGH)
