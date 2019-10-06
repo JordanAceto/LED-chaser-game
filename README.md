@@ -12,4 +12,6 @@ How to play:
 
 Python source code is located in src.
 
+To change pin numbers and/or modify game starting conditions, go to src -> Constants.py
+
 fritzing layout documents are located in fritzing_docs.
