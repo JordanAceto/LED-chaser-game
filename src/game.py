@@ -12,13 +12,14 @@ from Constants import STARTING_SAMPLE_PERIOD, STARTING_NUM_LIVES, LED_PINS, BUTT
 
 class Game():
 
-    def __init__(self, starting_sample_period, num_lives, timer, led_strip, button):
-        self.num_lives = num_lives
-        self.starting_num_lives = num_lives
+    def __init__(self, starting_sample_period, starting_num_lives, timer, led_strip, button):
+        self.starting_num_lives = starting_num_lives
+        self.num_lives = starting_num_lives
         self.num_points = 0
 
+        self.starting_sample_period = starting_sample_period
+
         self.timer = timer
-        self.starting_sample_period = self.timer.sample_period
         self.led_strip = led_strip
         self.button = button
 
