@@ -8,13 +8,7 @@ from LED_Strip import LED_Strip
 
 from Button import Button
 
-STARTING_SAMPLE_PERIOD = 0.3 # sample period in seconds, controls how fast the game starts out
-
-LED_PINS = [26, 21, 20, 16, 12]
-
-BUTTON_PIN = 13
-
-STARTING_NUM_LIVES = 3 
+from Constants import STARTING_SAMPLE_PERIOD, STARTING_NUM_LIVES, LED_PINS, BUTTON_PIN
 
 class Game():
 
